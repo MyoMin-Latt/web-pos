@@ -17,6 +17,6 @@ app.use('/api/customers', customerRoutes);
 app.use('/api/invoices', invoiceRoutes);
 app.use(notFound);
 app.use(errorHandler);
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5031;
 await connectDB(process.env.MONGO_URI);
 app.listen(PORT, () => console.log(`[Server] Listening on http://localhost:${PORT} (mode: ${isDbReady() ? 'mongodb' : 'demo-memory'})`));

@@ -16,14 +16,14 @@ The server **starts even if MongoDB is unreachable**: it logs a clear warning an
 
 ## Run (server first, then client)
 ```bash
-# Terminal 1 — server (port 5000)
+# Terminal 1 — server (port 5031)
 cd ~/workspace/web-pos/server
 cp .env.example .env   # then edit MONGO_URI / JWT_SECRET if you have MongoDB
 npm install
 npm run seed   # only needed with a real MongoDB; skips gracefully without one
 npm start
 
-# Terminal 2 — client (port 5173, proxies /api to :5000)
+# Terminal 2 — client (port 5173, proxies /api to :5031)
 cd ~/workspace/web-pos/client
 npm install
 npm run dev
