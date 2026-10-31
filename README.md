@@ -10,6 +10,7 @@ Separate project from `~/workspace/b-pos` (the agri-input B POS MVP) — nothing
 - **Invoices / POS:** cart add/remove/qty, totals, discount/tax, cash/card, customer attach, **custom invoice date picker** (not just today), checkout, receipt view + `window.print()`, invoice list/history.
 - **Offline resilience:** IndexedDB (`idb-keyval`) caches items/customers, queues invoices created offline in an outbox, `syncEngine.js` auto-syncs on the `online` event and every 15s. Header shows Online/Offline + Pending sync count. A queued invoice is only removed after the server confirms it (201) — an offline sale is never lost.
 - **Server:** Mongoose models, controllers, routes for users/items/customers/invoices, auth middleware, error handler, `.env.example`, seed script.
+- **UI (modern, 2026-10-31):** clean light theme, sticky blurred header with active-nav pills, rounded-2xl cards, indigo primary actions, pill badges for stock/payment/sync status, sticky cart on the POS page, and a centered branded login. No logic changed — same auth, search, cart, checkout, and offline queue.
 
 ## Server without MongoDB (important, honest label)
 The server **starts even if MongoDB is unreachable**: it logs a clear warning and stays up with `/api/health` responding `mode: "demo-memory"`. In that mode it serves the same demo data from an in-memory store (labelled `demo-memory` in health) so the app is demoable. It never claims Mongo is connected when it isn't. For real persistence, set a real `MONGO_URI` and restart — then health reports `mode: "mongodb"`.
