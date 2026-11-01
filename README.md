@@ -3,6 +3,8 @@
 A fast, lightweight, offline-resilient POS. Feature-based layout exactly as specified.
 Separate project from `~/workspace/b-pos` (the agri-input B POS MVP) — nothing there was touched.
 
+Full detailed specification (models, API, business rules, offline sync, limitations): see `PROJECT_SPEC.md`.
+
 ## What was built
 - **Auth:** register/login, JWT + bcrypt, roles `admin` / `cashier`, protected routes, staff login.
 - **Items:** CRUD (admin only for write), stock, price, category, barcode, debounced instant search by name/barcode/SKU, low-stock indicator, keyboard-friendly (autofocus + Enter adds sole match).
