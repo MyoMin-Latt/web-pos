@@ -15,7 +15,7 @@ Separate project from `~/workspace/b-pos` (the agri-input B POS MVP) — nothing
 ## Server without MongoDB (important, honest label)
 The server **starts even if MongoDB is unreachable**: it logs a clear warning and stays up with `/api/health` responding `mode: "demo-memory"`. In that mode it serves the same demo data from an in-memory store (labelled `demo-memory` in health) so the app is demoable. It never claims Mongo is connected when it isn't. For real persistence, set a real `MONGO_URI` and restart — then health reports `mode: "mongodb"`.
 
-## Run (server first, then client)
+## Run (server first, then web)
 ```bash
 # Terminal 1 — server (port 5031)
 cd ~/workspace/web-pos/server
@@ -24,8 +24,8 @@ npm install
 npm run seed   # only needed with a real MongoDB; skips gracefully without one
 npm start
 
-# Terminal 2 — client (port 5173, proxies /api to :5031)
-cd ~/workspace/web-pos/client
+# Terminal 2 — web (port 5173, proxies /api to :5031)
+cd ~/workspace/web-pos/web
 npm install
 npm run dev
 ```
@@ -40,6 +40,15 @@ npm run dev
 3. Sell from the POS register — you will see "Offline: sale queued locally (N pending)" and the header shows Offline + Pending count. The receipt still shows.
 4. Go back online — syncEngine fires on the `online` event (and every 15s) and posts the queued invoice; Pending drops to 0. Check it under Invoices.
 5. Note: login itself needs the server the first time (JWT); offline selling works after a login + cache.
+
+## Folders
+
+- `web/` — React web app (port 5173, proxies `/api` to :5031)
+- `server/` — Express + Mongoose API (port 5031)
+- `expo_mobile/` — Expo (SDK 58) mobile app, same features as web. See
+  `expo_mobile/README.md` — on a physical phone, start Expo with
+  `EXPO_PUBLIC_API_URL=http://<your-Mac-LAN-IP>:5031` so the phone can
+  reach the server.
 
 ## What still needs the user
 - A real `MONGO_URI` (local MongoDB or Atlas) in `server/.env` for durable, multi-device data. Without it, data lives only in server memory and resets on restart.
