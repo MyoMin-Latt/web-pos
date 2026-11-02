@@ -374,6 +374,17 @@ exact:
   - The offline flow is implemented and documented but has not been
     live-browser-tested end to end (DevTools offline → sell → online →
     pending drops to 0) — try that before relying on it in a shop.
+- **PWA (2026-11-01, web only):** `web/public/manifest.webmanifest`
+  (standalone, indigo theme, 192/512 icons), `web/public/sw.js`
+  (app-shell + static-asset cache, SPA navigation fallback to cached
+  `index.html`, `/api` never cached), registration in
+  `web/src/main.jsx` (production builds only, so dev reloads never go
+  stale), and a `preview` proxy in `web/vite.config.js` so the
+  production preview can log in against the server on `:5031`.
+  Browser service-worker activation and offline reload are still
+  unverified: the browser tooling here blocks localhost, so that check
+  needs a live-browser takeover or a test after pulling on a local
+  machine.
 
 ### 9.2 Mobile
 
